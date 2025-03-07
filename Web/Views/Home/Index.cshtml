@@ -1,0 +1,17 @@
+﻿@using Domain.HomePage
+@using Kentico.PageBuilder.Web.Mvc
+@using Kentico.Web.Mvc
+
+@model HomeModel
+
+@{
+    var optionsLimited = new EditableAreaOptions
+    {
+        AllowedWidgets = AllowedComponents.ALL,
+        AllowedSections = AllowedComponents.ALL
+    };
+}
+
+<h1>@Model.Title</h1>
+
+@await Html.Kentico().EditableAreaAsync("main", optionsLimited)

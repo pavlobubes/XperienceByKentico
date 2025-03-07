@@ -1,0 +1,33 @@
+﻿@using Domain.Content
+@using Kentico.PageBuilder.Web.Mvc
+@using Kentico.Web.Mvc
+
+@model ContentModel
+
+@{
+    var optionsLimited = new EditableAreaOptions
+    {
+        AllowedWidgets = AllowedComponents.ALL,
+        AllowedSections = AllowedComponents.ALL
+    };
+}
+
+<h1>@Model.Title</h1>
+
+@Html.Raw(Model.Description)
+
+@if (Model.ImageThumbnail.Any())
+{
+    foreach (var thumbnail in Model.ImageThumbnail)
+    {
+        <picture>
+            @foreach (var variant in thumbnail.Variants)
+            {
+                <source srcset="@variant.Url" />
+            }
+            <img src="@thumbnail.Url" alt="@thumbnail.Description" title="@thumbnail.Title" />
+        </picture>
+    }
+}
+
+@await Html.Kentico().EditableAreaAsync("main", optionsLimited)

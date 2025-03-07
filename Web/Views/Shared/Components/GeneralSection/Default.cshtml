@@ -1,0 +1,19 @@
+﻿@using DancingGoat.Web.Components.Sections.GeneralSection
+@using DancingGoat.Web.Components.ViewComponents.PageBuilderColumns
+@using Kentico.Web.Mvc
+@using Kentico.Content.Web.Mvc
+@using Kentico.PageBuilder.Web.Mvc
+@using CMS.Helpers
+@using DancingGoat.Web.Components.ViewComponents
+
+@model GeneralSectionViewModel
+
+@{
+    var sectionAnchor = !string.IsNullOrWhiteSpace(Model.SectionAnchor) ? $"id={Model.SectionAnchor}" : "";
+}
+
+<section @sectionAnchor>
+    <tg-component-style color-scheme="@Model.ColorScheme" corner-style="@Model.CornerStyle" class="c-section default">
+        <vc:page-builder-columns column-layout-option="@Model.ColumnLayout" page-builder-area-type="@PageBuilderAreaType.WidgetZones" editable-area-options="@new EditableAreaOptions()" />
+    </tg-component-style>    
+</section>

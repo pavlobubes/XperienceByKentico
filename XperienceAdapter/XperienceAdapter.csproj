@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AdminOrgName>acme</AdminOrgName>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <AdminClientPath Include="Client\dist\**">
+      <ProjectName>web-admin</ProjectName>
+    </AdminClientPath>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Client\node_modules\**" />
+    <EmbeddedResource Remove="Client\node_modules\**" />
+    <None Remove="Client\node_modules\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Kentico.Xperience.Admin" Version="30.2.0" />
+    <PackageReference Include="Kentico.Xperience.AzureStorage" Version="30.2.0" />
+    <PackageReference Include="Kentico.Xperience.Cloud" Version="30.2.0" />
+    <PackageReference Include="Kentico.Xperience.Core" Version="30.2.0" />
+    <PackageReference Include="Kentico.Xperience.ImageProcessing" Version="30.2.0" />
+    <PackageReference Include="Kentico.Xperience.WebApp" Version="30.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\Cache\Extensions\" />
+  </ItemGroup>
+
+</Project>

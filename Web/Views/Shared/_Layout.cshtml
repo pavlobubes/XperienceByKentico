@@ -1,0 +1,30 @@
+﻿@using Kentico.PageBuilder.Web.Mvc
+@using Kentico.Web.Mvc
+
+@inject IPageBuilderDataContextRetriever pageBuilderDataContextRetriever
+
+@{
+    var context = pageBuilderDataContextRetriever.Retrieve();
+    var pageBuilderDisabled = context is null || context.GetMode() == PageBuilderMode.Off;
+    string s = string.Empty;
+}
+
+<!doctype html>
+
+<html class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @if (!pageBuilderDisabled)
+    {
+        @Html.Kentico().PageBuilderStyles()
+    }
+</head>
+<body>
+    @RenderBody()
+    @if (!pageBuilderDisabled)
+    {
+        @Html.Kentico().PageBuilderScripts()
+    }
+</body>
+</html>
