@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -8,7 +7,9 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <AdminClientPath Include="Client\dist\**">
+    <ClientFiles Include="Client\dist\**" />
+    <AdditionalFiles Include="@(ClientFiles)" />
+    <AdminClientPath Include="@(ClientFiles)">
       <ProjectName>web-admin</ProjectName>
     </AdminClientPath>
   </ItemGroup>
@@ -17,7 +18,7 @@
     <EmbeddedResource Remove="Client\node_modules\**" />
     <None Remove="Client\node_modules\**" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="Kentico.Xperience.Admin" Version="30.2.0" />
     <PackageReference Include="Kentico.Xperience.AzureStorage" Version="30.2.0" />
@@ -30,10 +31,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\Cache\Extensions\" />
   </ItemGroup>
 
 </Project>
