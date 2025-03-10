@@ -1,23 +1,17 @@
-﻿import React, { useState } from 'react';
+﻿import React from 'react';
 
-// Imports a color selector component from react-colorful
-import { HexColorPicker } from "react-colorful";
+import {HexColorPicker} from "react-colorful";
 
-import { FormComponentProps } from '@kentico/xperience-admin-base';
-import { FormItemWrapper } from '@kentico/xperience-admin-components';
+import {FormComponentProps} from '@kentico/xperience-admin-base';
+import {FormItemWrapper} from '@kentico/xperience-admin-components';
 
 export const ColorSelectorFormComponent = (props: FormComponentProps) => {
+    console.log('ColorSelectorFormComponent', props);
 
     const handleOnChange = (value: string) => {
-        // If 'onChange' is undefined, do nothing
-        if (props.onChange) {
-            // Passes the new user input to a parent component where all field values are maintained.
-            // 'value' emitted by the color picker's onChange event stores the most up to date input of the component.
-            props.onChange(value);
-        }
+        props.onChange?.(value);
     };
 
-    // Renders the color selector and ensures propagation of the selected value
     return <FormItemWrapper
         label={props.label}
         explanationText={props.explanationText}
@@ -25,7 +19,10 @@ export const ColorSelectorFormComponent = (props: FormComponentProps) => {
         validationMessage={props.validationMessage}
         markAsRequired={props.required}
         labelIcon={props.tooltip ? 'xp-i-circle' : undefined}
-        labelIconTooltip={props.tooltip}>
-        <HexColorPicker color={props.value} onChange={handleOnChange} />
+        labelIconTooltip={props.tooltip}
+        disabled={props.disabled}>
+        <div style={{pointerEvents: props.disabled ? 'none' : 'auto', opacity: props.disabled ? 0.5 : 1}}>
+            <HexColorPicker color={props.value} onChange={handleOnChange}/>
+        </div>
     </FormItemWrapper>;
 };

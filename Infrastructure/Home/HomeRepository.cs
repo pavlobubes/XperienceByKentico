@@ -6,12 +6,14 @@ namespace Infrastructure.Home;
 
 public class HomeRepository(IHomePageRepository homePageRepository) : IHomeRepository
 {
-    public async Task<HomeModel?> GetHome()
+    public async Task<HomeModel> GetHome()
     {
         var homePage = await homePageRepository.GetHomePage();
 
         if (homePage is null)
-            return null;
+        {
+            throw new Exception("Home page not found");
+        }
 
         return new HomeModel(homePage.Title);
     }

@@ -1,5 +1,4 @@
-﻿import React, { useState } from 'react';
-import { ValidationRule, ValidationRuleProps } from '@kentico/xperience-admin-base';
+﻿import { ValidationRule, ValidationRuleProps } from '@kentico/xperience-admin-base';
 
 export interface ValueIsBetweenValidationRuleProps extends ValidationRuleProps {
     readonly max: number
@@ -7,7 +6,8 @@ export interface ValueIsBetweenValidationRuleProps extends ValidationRuleProps {
 }
 
 export const ValueIsBetweenValidationRule: ValidationRule<ValueIsBetweenValidationRuleProps, number> = (props, value) => {
-    console.log(props);
+    console.log('ValueIsBetweenValidationRule', props, value);
+
     const validate = (max: number, min: number) => {
         return !Number.isInteger(value) || (min <= value && value <= max);
     };
