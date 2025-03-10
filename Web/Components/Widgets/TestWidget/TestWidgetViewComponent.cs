@@ -22,6 +22,7 @@ public class TestWidgetViewComponent : ViewComponent
 
     public async Task<ViewViewComponentResult> InvokeAsync(TestWidgetProperties properties)
     {
+        await Task.Delay(1);
         var test = Validator.TryValidateObject(properties, new(properties), [], true);
         return View(new TestWidgetViewModel());
     }

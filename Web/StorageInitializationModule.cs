@@ -4,7 +4,9 @@ using CMS.DataEngine;
 using CMS.IO;
 
 using Kentico.Xperience.AzureStorage;
+
 using DancingGoat.Web;
+
 using Kentico.Xperience.Cloud;
 
 using Microsoft.AspNetCore.Hosting;
@@ -15,7 +17,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace DancingGoat.Web
 {
-    public class StorageInitializationModule : Module
+    public class StorageInitializationModule() : Module(nameof(StorageInitializationModule))
     {
         /// <summary>
         /// Local directory used for deployment of blob storage contents.
@@ -29,26 +31,12 @@ namespace DancingGoat.Web
         private const string CONTAINER_NAME = "default";
 
 
-        private IWebHostEnvironment mEnvironment;
-
-
         /// <summary>
         /// Gets the web hosting environment information.
         /// </summary>
-        public IWebHostEnvironment Environment
-        {
-            get
-            {
-                return mEnvironment ??= Service.Resolve<IWebHostEnvironment>();
-            }
-        }
-
+        public IWebHostEnvironment Environment => Service.Resolve<IWebHostEnvironment>();
 
         // Module class constructor, the system registers the module
-        public StorageInitializationModule()
-            : base(nameof(StorageInitializationModule))
-        {
-        }
 
 
         // Contains initialization code that is executed when the application starts

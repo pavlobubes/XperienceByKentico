@@ -19,7 +19,7 @@ public class ValueIsBetweenValidationRule : ValidationRule<ValueIsBetweenValidat
     // Replace 'acme/web-admin-custom' with the name of your organization and project
     public override string ClientRuleName => "@acme/web-admin/ValueIsBetweenValidationRule";
 
-    protected override Func<string, string> ErrorMessageFormatter => (errorMessage) => String.Format($"Min - {Properties.Min} and Max - {Properties.Max}");
+    protected override Func<string, string> ErrorMessageFormatter => (errorMessage) => string.Format($"Min - {Properties.Min} and Max - {Properties.Max}");
     
 
     // Sends properties to the client for use in client-side validation

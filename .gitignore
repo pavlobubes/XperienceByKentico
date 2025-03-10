@@ -7,3 +7,10 @@
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
+bin/
+obj/
+.idea/
+node_modules/
+assets/
+dist/
+appsettings.Local.json

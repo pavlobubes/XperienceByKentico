@@ -2,21 +2,9 @@
 
 namespace XperienceAdapter.ValidationRules.ValueIsBetween;
 
-public class ValueIsBetweenValidationRuleAttribute : ValidationRuleAttribute
+public class ValueIsBetweenValidationRuleAttribute(int max, int min) : ValidationRuleAttribute
 {
-    public int Max
-    {
-        get;
-    }
+    public int Max { get; } = max;
 
-    public int Min
-    {
-        get;
-    }
-
-    public ValueIsBetweenValidationRuleAttribute(int max, int min)
-    {
-        Max = max;
-        Min = min;
-    }
+    public int Min { get; } = min;
 }

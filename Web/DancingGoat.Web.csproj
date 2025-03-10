@@ -4,6 +4,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="assets\**" />
+    <Content Remove="assets\**" />
+    <EmbeddedResource Remove="assets\**" />
+    <None Remove="assets\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="app_offline.htm_" Condition="Exists('app_offline.htm_')" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
   <ItemGroup>
