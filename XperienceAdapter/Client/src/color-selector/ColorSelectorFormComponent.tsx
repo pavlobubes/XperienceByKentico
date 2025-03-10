@@ -1,6 +1,4 @@
-﻿import React from 'react';
-
-import {HexColorPicker} from "react-colorful";
+﻿import {HexColorPicker} from "react-colorful";
 
 import {FormComponentProps} from '@kentico/xperience-admin-base';
 import {FormItemWrapper} from '@kentico/xperience-admin-components';
