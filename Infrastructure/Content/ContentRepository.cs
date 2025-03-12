@@ -22,6 +22,13 @@ public class ContentRepository(
 
         var url = await webPageUrlRetriever.Retrieve(contentPage.ContentItemID, webPage.LanguageName);
 
+        var childPages = await contentPageRepository.GetContentPages(contentPage.WebPageItemTreePath);
+        var urls = await webPageUrlRetriever.Retrieve(
+            childPages.Select(p => p.WebPageItemGUID).ToArray(),
+            webPage.WebsiteChannelName,
+            webPage.LanguageName
+        );
+
         return new ContentModel(
             contentPage.Title,
             contentPage.Description,

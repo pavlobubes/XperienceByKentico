@@ -41,7 +41,7 @@ public class PageContentService(
         return new ContentItemQueryBuilder()
             .ForContentType(
                 contentType,
-                filter + (filter => filter.ForWebsite(websiteChannelContext.WebsiteChannelName).TopN(1))
+                filter + (filter => filter.ForWebsite(websiteChannelContext.WebsiteChannelName))
         ).InLanguage(preferredLanguageRetriever.Get());
     }
 

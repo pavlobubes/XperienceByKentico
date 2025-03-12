@@ -11,6 +11,9 @@ using XperienceAdapter.Models.PageContentTypes.DancingGoat.Content;
 using CMS.Websites;
 using System;
 using CMS.Base;
+using CMS.EmailEngine;
+using System.Text;
+using System.Net.Mime;
 
 // Application service registrations
 var builder = WebApplication.CreateBuilder(args);
@@ -34,6 +37,18 @@ builder.Services.AddKentico(features =>
             Content.CONTENT_TYPE_NAME
         ]
     });
+});
+
+//Emails
+builder.Services.AddXperienceSystemSmtp(options =>
+{
+    options.Server = new SmtpServer { Host = "smtp.mailersend.net", Port = 587, UserName = "MS_vNqYFJ@trial-v69oxl505pdg785k.mlsender.net", Password = "mssp.sHgnjyZ.0r83ql3j38mgzw1j.CBU0Ks7" };
+    options.Encoding = Encoding.UTF8;
+    options.TransferEncoding = TransferEncoding.QuotedPrintable;
+});
+builder.Services.AddXperienceChannelSmtp("DancingGoatEmail", options =>
+{
+    options.Server = new SmtpServer { Host = "smtp.mailersend.net", Port = 587, UserName = "MS_vNqYFJ@trial-v69oxl505pdg785k.mlsender.net", Password = "mssp.sHgnjyZ.0r83ql3j38mgzw1j.CBU0Ks7" };
 });
 
 builder.Services.AddAuthentication();

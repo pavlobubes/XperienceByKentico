@@ -10,7 +10,9 @@ public class ContentPageDto : BasicPage, IPage
         nameof(XperienceAdapter.Models.PageContentTypes.DancingGoat.Content.Content.Title),
         nameof(XperienceAdapter.Models.PageContentTypes.DancingGoat.Content.Content.Description),
         nameof(XperienceAdapter.Models.PageContentTypes.DancingGoat.Content.Content.BackgroundColor),
-        nameof(XperienceAdapter.Models.PageContentTypes.DancingGoat.Content.Content.ImageThumbnail)
+        nameof(XperienceAdapter.Models.PageContentTypes.DancingGoat.Content.Content.ImageThumbnail),
+        nameof(XperienceAdapter.Models.PageContentTypes.DancingGoat.Content.Content.SystemFields.WebPageItemTreePath),
+        nameof(XperienceAdapter.Models.PageContentTypes.DancingGoat.Content.Content.SystemFields.WebPageItemGUID)
     ];
 
     public string Title { get; set; }

@@ -12,8 +12,14 @@ public class BasicPage
 
     public int ContentItemID { get; }
 
+    public string WebPageItemTreePath { get; set; }
+
+    public Guid WebPageItemGUID { get; set; }
+
     protected BasicPage(IWebPageFieldsSource page)
     {
         ContentItemID = page.SystemFields.ContentItemID;
+        WebPageItemTreePath = page.SystemFields.WebPageItemTreePath;
+        WebPageItemGUID = page.SystemFields.WebPageItemGUID;
     }
 }

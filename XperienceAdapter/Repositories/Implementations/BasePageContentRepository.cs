@@ -16,7 +16,7 @@ public abstract class BasePageContentRepository<TPageModel, TPage> : IRepository
         MapPages(await PageContentService.RetrieveAsync<TPage>(contentType, ColumnsSetup + filter));
 
     protected async Task<TPageModel?> GetPageAsync(string contentType, Action<ContentTypeQueryParameters>? filter = default) =>
-        MapPage(await PageContentService.RetrieveOneAsync<TPage>(contentType, ColumnsSetup + filter));
+        MapPage(await PageContentService.RetrieveOneAsync<TPage>(contentType, ColumnsSetup + filter + GetOne));
 
     private List<TPageModel> MapPages(IEnumerable<TPage> pages) =>
         new(pages.Select(MapProperties));
@@ -26,6 +26,9 @@ public abstract class BasePageContentRepository<TPageModel, TPage> : IRepository
 
     private static void ColumnsSetup(ContentTypeQueryParameters q) => q
         .Columns([..BasicPage.SourceColumns, ..TPageModel.Columns]);
+
+    private static void GetOne(ContentTypeQueryParameters q) => q
+        .TopN(1);
 
     protected abstract TPageModel MapProperties(TPage page);
 }

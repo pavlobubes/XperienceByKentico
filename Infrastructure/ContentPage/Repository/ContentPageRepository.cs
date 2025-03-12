@@ -12,6 +12,14 @@ public class ContentPageRepository : BasePageContentRepository<ContentPageDto, X
             query => query.Where(where => where.WhereEquals(nameof(IWebPageContentQueryDataContainer.WebPageItemID), WebPageItemID)).WithLinkedItems(3)
         );
 
+    public async Task<IEnumerable<ContentPageDto>> GetContentPages(string parentPath) =>
+        await GetPagesAsync(
+            XperienceAdapter.Models.PageContentTypes.DancingGoat.Content.Content.CONTENT_TYPE_NAME,
+            query => query.Where(where => where.WhereNotEquals(nameof(IWebPageContentQueryDataContainer.WebPageItemTreePath), parentPath)
+                .WhereStartsWith(nameof(IWebPageContentQueryDataContainer.WebPageItemTreePath), parentPath))
+                .WithLinkedItems(3)
+        );
+
     protected override ContentPageDto MapProperties(XperienceAdapter.Models.PageContentTypes.DancingGoat.Content.Content page)
     {
         return new(page);
