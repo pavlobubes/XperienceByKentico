@@ -11,6 +11,7 @@ public class ContentPageDto : BasicPage, IPage
         nameof(XperienceAdapter.Models.PageContentTypes.DancingGoat.Content.Content.Description),
         nameof(XperienceAdapter.Models.PageContentTypes.DancingGoat.Content.Content.BackgroundColor),
         nameof(XperienceAdapter.Models.PageContentTypes.DancingGoat.Content.Content.ImageThumbnail),
+        nameof(XperienceAdapter.Models.PageContentTypes.DancingGoat.Content.Content.Categories),
         nameof(XperienceAdapter.Models.PageContentTypes.DancingGoat.Content.Content.SystemFields.WebPageItemTreePath),
         nameof(XperienceAdapter.Models.PageContentTypes.DancingGoat.Content.Content.SystemFields.WebPageItemGUID)
     ];
@@ -21,7 +22,9 @@ public class ContentPageDto : BasicPage, IPage
 
     public string BackgroundColor { get; set; }
 
-    public IEnumerable<Image> ImageThumbnail { get; set; }
+    public IEnumerable<Guid> Categories { get; set; } = [];
+
+    public IEnumerable<Image> ImageThumbnail { get; set; } = [];
 
     public ContentPageDto(XperienceAdapter.Models.PageContentTypes.DancingGoat.Content.Content page) : base(page)
     {
@@ -29,5 +32,6 @@ public class ContentPageDto : BasicPage, IPage
         Description = page.Description;
         BackgroundColor = page.BackgroundColor;
         ImageThumbnail = page.ImageThumbnail;
+        Categories = page.Categories.Select(c => c.Identifier);
     }
 }

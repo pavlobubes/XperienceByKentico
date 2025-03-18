@@ -1,33 +1,46 @@
-﻿using CMS.Websites;
+﻿using CMS.ContentEngine;
+using CMS.DataEngine;
+using CMS.Websites;
 using Domain.Content;
 using Domain.Image;
 using Infrastructure.ContentPage.Repository;
-using Kentico.Content.Web.Mvc;
+using XperienceAdapter.Models.Classes.DancingGoat.GlobalSettingsKey;
 
 namespace Infrastructure.Content;
 
 public class ContentRepository(
-    IWebPageDataContextRetriever webPageDataContextRetriever,
     IContentPageRepository contentPageRepository,
-    IWebPageUrlRetriever webPageUrlRetriever) : IContentRepository
+    IWebPageUrlRetriever webPageUrlRetriever,
+    IInfoProvider<GlobalSettingsKeyInfo> globalSettingsKeyInfoProvider,
+    ITaxonomyRetriever taxonomyRetriever) : IContentRepository
 {
-    public async Task<ContentModel?> GetContent()
+    public async Task<ContentModel?> GetContent(int WebPageItemID, string LanguageName, string WebsiteChannelName)
     {
-        var webPage = webPageDataContextRetriever.Retrieve().WebPage;
-
-        var contentPage = await contentPageRepository.GetContentPage(webPage.WebPageItemID);
+        var contentPage = await contentPageRepository.GetContentPage(WebPageItemID);
 
         if (contentPage is null)
             return null;
 
-        var url = await webPageUrlRetriever.Retrieve(contentPage.ContentItemID, webPage.LanguageName);
+        var url = await webPageUrlRetriever.Retrieve(WebPageItemID, LanguageName);
 
         var childPages = await contentPageRepository.GetContentPages(contentPage.WebPageItemTreePath);
         var urls = await webPageUrlRetriever.Retrieve(
             childPages.Select(p => p.WebPageItemGUID).ToArray(),
-            webPage.WebsiteChannelName,
-            webPage.LanguageName
+            WebsiteChannelName,
+            LanguageName
         );
+
+        var taxonomy = await taxonomyRetriever.RetrieveTaxonomy("Carpets", LanguageName);
+        if (taxonomy is not null)
+        {
+            var taxonomyPagesAny = await contentPageRepository.GetContentPagesAnyTag(taxonomy.Tags.Select(t => t.Identifier));
+            var taxonomyPagesAll = await contentPageRepository.GetContentPagesAllTags(taxonomy.Tags.Select(t => t.Identifier).ToList());
+        }
+
+        var testSetting = await globalSettingsKeyInfoProvider.Get()
+            .WhereEquals(nameof(GlobalSettingsKeyInfo.GlobalSettingsKeyName), "TestKey")
+            .TopN(1)
+            .GetEnumerableTypedResultAsync();
 
         return new ContentModel(
             contentPage.Title,

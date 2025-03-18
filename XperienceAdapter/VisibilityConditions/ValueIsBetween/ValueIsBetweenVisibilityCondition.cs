@@ -4,7 +4,7 @@ using XperienceAdapter.VisibilityConditions.ValueIsBetween;
 [assembly: RegisterFormVisibilityCondition(
     identifier: ValueIsBetweenVisibilityCondition.IDENTIFIER,
     conditionType: typeof(ValueIsBetweenVisibilityCondition),
-    name: "Value is between zalupa",
+    name: "Value is between",
     TargetFieldType = typeof(int)
 )]
 

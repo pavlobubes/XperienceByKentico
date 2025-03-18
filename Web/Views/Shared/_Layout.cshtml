@@ -15,16 +15,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @if (!pageBuilderDisabled)
-    {
-        @Html.Kentico().PageBuilderStyles()
-    }
+    <page-builder-styles />
 </head>
 <body>
     @RenderBody()
-    @if (!pageBuilderDisabled)
-    {
-        @Html.Kentico().PageBuilderScripts()
-    }
+    <page-builder-scripts />
 </body>
 </html>

@@ -7,7 +7,7 @@ public class GetContentQueryHandler(IContentRepository contentRepository) : IReq
 {
     public async Task<ContentModel?> Handle(GetContentQuery request, CancellationToken cancellationToken)
     {
-        var contentPage = await contentRepository.GetContent();
+        var contentPage = await contentRepository.GetContent(request.WebPageItemID, request.LanguageName, request.WebsiteChannelName);
         return contentPage;
     }
 }

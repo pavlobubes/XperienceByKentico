@@ -50,6 +50,18 @@ namespace XperienceAdapter.Models.PageContentTypes.DancingGoat.Content
 
 
         /// <summary>
+        /// Categories.
+        /// </summary>
+        public IEnumerable<TagReference> Categories { get; set; }
+
+
+        /// <summary>
+        /// test.
+        /// </summary>
+        public int test { get; set; }
+
+
+        /// <summary>
         /// ImageThumbnail.
         /// </summary>
         public IEnumerable<Image> ImageThumbnail { get; set; }
@@ -59,6 +71,12 @@ namespace XperienceAdapter.Models.PageContentTypes.DancingGoat.Content
         /// BackgroundColor.
         /// </summary>
         public string BackgroundColor { get; set; }
+
+
+        /// <summary>
+        /// teststring.
+        /// </summary>
+        public string teststring { get; set; }
 
 
         /// <summary>

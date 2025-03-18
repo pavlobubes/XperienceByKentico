@@ -17,18 +17,5 @@ public class WebCompositionRoot : Module
             .AsImplementedInterfaces()
             .PropertiesAutowired()
             .InstancePerLifetimeScope();
-
-        // Register all concrete classes that implement IScoped in one go.
-        builder.RegisterAssemblyTypes(typeof(IHomePageRepository).Assembly)
-            .Where(type => type is { IsClass: true, IsAbstract: false } && type.IsAssignableTo<IScoped>())
-            .AsImplementedInterfaces()
-            .PropertiesAutowired()
-            .InstancePerLifetimeScope();
-
-        // Register MediatR Handlers
-        builder.RegisterAssemblyTypes(typeof(GetHomeQueryHandler).Assembly)
-            .AsClosedTypesOf(typeof(IRequestHandler<,>))
-            .AsImplementedInterfaces()
-            .InstancePerLifetimeScope();
     }
 }

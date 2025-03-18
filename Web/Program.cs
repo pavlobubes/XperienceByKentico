@@ -14,6 +14,9 @@ using CMS.Base;
 using CMS.EmailEngine;
 using System.Text;
 using System.Net.Mime;
+using XperienceAdapter.Localization;
+using Kentico.OnlineMarketing.Web.Mvc;
+using Application.Home.Queries.GetHomeQuery;
 
 // Application service registrations
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +32,7 @@ builder.Host
 builder.Services.AddKentico(features =>
 {
     features.UseWebPageRouting();
+    features.UseEmailMarketing();
     features.UsePageBuilder(new PageBuilderOptions
     {
         ContentTypeNames =
@@ -52,7 +56,12 @@ builder.Services.AddXperienceChannelSmtp("DancingGoatEmail", options =>
 });
 
 builder.Services.AddAuthentication();
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+.AddDataAnnotationsLocalization(options =>
+        options.DataAnnotationLocalizerProvider = (type, factory) =>
+            factory.Create(nameof(SharedResource), typeof(SharedResource).Assembly.GetName().Name!));
+
+
 builder.Services.Configure<IISApplicationInitializationOptions>(options =>
 {
     options.UseDefaultSystemResponseForPreload = true;
@@ -65,7 +74,7 @@ builder.Services.Configure<IISApplicationInitializationOptions>(options =>
 //{
 //    options.UseSSL = false;
 //});
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetHomeQueryHandler).Assembly));
 
 var app = builder.Build();
 

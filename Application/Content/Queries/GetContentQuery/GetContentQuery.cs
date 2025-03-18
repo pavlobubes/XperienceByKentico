@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Application.Content.Queries.GetContentQuery;
 
-public record GetContentQuery() : IRequest<ContentModel> { }
+public record GetContentQuery(int WebPageItemID, string LanguageName, string WebsiteChannelName) : IRequest<ContentModel> { }
